@@ -1,0 +1,5 @@
+2026-06-06 10:00:01 INFO System started successfully.
+2026-06-06 10:05:12 WARNING High memory usage detected.
+2026-06-06 10:10:45 ERROR Failed to connect to database.
+2026-06-06 10:15:00 INFO User logged in.
+2026-06-06 10:20:30 ERROR Disk full warning on /dev/sda1.
