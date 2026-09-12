@@ -1,27 +1,24 @@
 import psutil
 
-
-def collect_system_metrics(path="/"):
-    """Return a compact system snapshot suitable for human or JSON output."""
+def check_system():
+    print("=== SysPulse-CLI Rendszerfigyelő ===")
+    
+    # CPU terhelés
+    cpu_percent = psutil.cpu_percent(interval=1)
+    print(f"CPU Terhelés: {cpu_percent}%")
+    
+    # Memória (RAM) adatok
     memory = psutil.virtual_memory()
-    disk = psutil.disk_usage(path)
-    return {
-        "cpu_percent": psutil.cpu_percent(interval=1),
-        "memory_total_gb": round(memory.total / (1024**3), 2),
-        "memory_used_gb": round(memory.used / (1024**3), 2),
-        "memory_percent": memory.percent,
-        "disk_path": path,
-        "disk_total_gb": round(disk.total / (1024**3), 2),
-        "disk_percent": disk.percent,
-    }
+    total_ram_gb = memory.total / (1024 ** 3)
+    used_ram_gb = memory.used / (1024 ** 3)
+    print(f"RAM Összesen: {total_ram_gb:.2f} GB")
+    print(f"RAM Használt: {memory.percent}% ({used_ram_gb:.2f} GB)")
+    
+    # Lemez (Disk) adatok
+    disk = psutil.disk_usage('/')
+    total_disk_gb = disk.total / (1024 ** 3)
+    print(f"Lemez Összesen: {total_disk_gb:.2f} GB")
+    print(f"Lemez Használt: {disk.percent}%")
 
-
-def format_system_metrics(metrics):
-    return "\n".join(
-        [
-            "=== SysPulse system snapshot ===",
-            f"CPU usage: {metrics['cpu_percent']}%",
-            f"Memory: {metrics['memory_percent']}% ({metrics['memory_used_gb']} / {metrics['memory_total_gb']} GB)",
-            f"Disk ({metrics['disk_path']}): {metrics['disk_percent']}% ({metrics['disk_total_gb']} GB total)",
-        ]
-    )
+if __name__ == "__main__":
+    check_system()
