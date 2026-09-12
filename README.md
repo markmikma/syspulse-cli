@@ -2,12 +2,13 @@
 
 > A small Python utility for quick system checks and first-pass log triage on Linux and WSL.
 
-SysPulse CLI is an operations-support project. It reports CPU, memory, and disk usage, and it summarises `ERROR` and `WARNING` messages in a text log. The scope is deliberately small: it is intended to show clear scripting, repeatable checks, and a clean starting point for troubleshooting.
+SysPulse CLI is an operations-support project. It reports CPU, memory, and disk usage, and it summarises `ERROR` and `WARNING` messages in a text log. It supports readable terminal output and JSON output for simple automation.
 
 ## What it does
 
 - Displays current CPU, RAM, and disk utilisation through `psutil`.
 - Counts `ERROR` and `WARNING` entries in a text log.
+- Offers `status` and `logs` subcommands with optional `--json` output.
 - Runs locally on Linux/WSL or in a Docker container.
 - Includes automated checks for the monitoring and log-parser output.
 
@@ -27,10 +28,16 @@ source .venv/bin/activate       # Windows PowerShell: .venv\\Scripts\\Activate.p
 pip install -r requirements.txt
 
 # Basic system snapshot
-python src/monitor.py
+python src/syspulse.py status
 
-# Summarise the included sample log
-python src/parser.py
+# Inspect a specific filesystem path
+python src/syspulse.py status --path /var
+
+# Summarise a log file
+python src/syspulse.py logs sample.log
+
+# Produce JSON for a script or pipeline
+python src/syspulse.py status --json
 ```
 
 ## Run with Docker

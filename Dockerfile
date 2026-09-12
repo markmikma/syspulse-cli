@@ -1,5 +1,5 @@
 # Használjunk egy könnyű súlyú Python imázst
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 # Munkamappa kijelölése a konténeren belül
 WORKDIR /app
@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Alapértelmezett parancs, ami lefut, ha elindul a konténer
-CMD ["python", "src/monitor.py"]
+CMD ["python", "src/syspulse.py", "status"]
