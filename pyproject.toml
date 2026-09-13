@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=65.5"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "syspulse-cli"
+version = "0.1.0"
+description = "A scriptable system-health and log-analysis CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "psutil>=5.9",
+  "tomli>=2.0; python_version < '3.11'",
+]
+authors = [{ name = "Mark" }]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.scripts]
+syspulse = "syspulse.cli:main"
+
+[project.optional-dependencies]
+dev = ["coverage>=7.6", "mypy>=1.10", "ruff>=0.6"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]

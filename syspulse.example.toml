@@ -1,0 +1,8 @@
+[thresholds]
+cpu = 85
+memory = 90
+disk = 90
+
+[alerts]
+# Store the webhook URL in the operating system environment, not in this file.
+webhook_env = "SYSPULSE_WEBHOOK_URL"
